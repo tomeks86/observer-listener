@@ -2,6 +2,8 @@ package edu.tseidler;
 
 import edu.tseidler.observer.OnewsAgency;
 import edu.tseidler.observer.OnewsChannel;
+import edu.tseidler.propertychangelistener.PCLNewsAgency;
+import edu.tseidler.propertychangelistener.PCLNewsChannel;
 import edu.tseidler.standard.NewsAgency;
 import edu.tseidler.standard.NewsChannel;
 
@@ -38,5 +40,19 @@ public class Main {
         oobservable.setNews("aaa");
         oobservable.deleteObserver(oobserver2);
         oobservable.setNews("aaaaaa");
+        System.out.println();
+
+        PCLNewsAgency ooobservable = new PCLNewsAgency();
+        PCLNewsChannel ooobserver1 = new PCLNewsChannel("la une");
+        PCLNewsChannel ooobserver2 = new PCLNewsChannel("la deux");
+        PCLNewsChannel ooobserver3 = new PCLNewsChannel("la trois");
+
+        ooobservable.addPropertyChangeListener(ooobserver1);
+        ooobservable.addPropertyChangeListener(ooobserver2);
+        ooobservable.addPropertyChangeListener(ooobserver3);
+        ooobservable.setNews("zutt");
+
+        ooobservable.removePropertyChangeListener(ooobserver2);
+        ooobservable.setNews("putain!");
     }
 }
