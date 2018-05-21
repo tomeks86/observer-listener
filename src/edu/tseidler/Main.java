@@ -62,9 +62,12 @@ public class Main {
         Thermometer thermometer1 = new MyPreciseThermometer("termometr 1", weatherStation.getTemperature(), weatherStation.getPressure());
         Thermometer thermometer2 = new MyOldThermometer("termometr 2", weatherStation.getTemperature(), weatherStation.getPressure());
         Higrometer higrometer = new MyHigrometer("higrometer", weatherStation.getTemperature(), weatherStation.getHumidity());
-        weatherStation.addPropertyChangeListener(thermometer1);
-        weatherStation.addPropertyChangeListener(thermometer2);
-        weatherStation.addPropertyChangeListener(higrometer);
+        weatherStation.addTempPropertyChangeListener(thermometer1);
+        weatherStation.addPressurePropertyChangeListener(thermometer1);
+        weatherStation.addTempPropertyChangeListener(thermometer2);
+        weatherStation.addPressurePropertyChangeListener(thermometer2);
+        weatherStation.addTempPropertyChangeListener(higrometer);
+        weatherStation.addHumidityPropertyChangeListener(higrometer);
 
         System.out.println("temp change!");
         weatherStation.setTemperature(17);
@@ -80,5 +83,11 @@ public class Main {
         System.out.println();
         System.out.println("humidity change!");
         weatherStation.setHumidity(10);
+        System.out.println();
+
+        weatherStation.removeTempPropertyChangeListener(higrometer);
+        System.out.println("higrometer removed from tempchangelisteners");
+        System.out.println("temp change!");
+        weatherStation.setTemperature(35);
     }
 }

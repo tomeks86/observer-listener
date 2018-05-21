@@ -8,35 +8,55 @@ public class WeatherStation {
     private double pressure;
     private double humidity;
 
-    private PropertyChangeSupport support;
+    private PropertyChangeSupport temperatureSupport;
+    private PropertyChangeSupport pressureSupport;
+    private PropertyChangeSupport humiditySupport;
 
     public WeatherStation(double temperature, double pressure, double humidity) {
         this.temperature = temperature;
         this.pressure = pressure;
         this.humidity = humidity;
-        support = new PropertyChangeSupport(this);
+        temperatureSupport = new PropertyChangeSupport(this);
+        pressureSupport = new PropertyChangeSupport(this);
+        humiditySupport = new PropertyChangeSupport(this);
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
+    public void addTempPropertyChangeListener(PropertyChangeListener pcl) {
+        temperatureSupport.addPropertyChangeListener(pcl);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        support.removePropertyChangeListener(pcl);
+    public void addPressurePropertyChangeListener(PropertyChangeListener pcl) {
+        pressureSupport.addPropertyChangeListener(pcl);
+    }
+
+    public void addHumidityPropertyChangeListener(PropertyChangeListener pcl) {
+        humiditySupport.addPropertyChangeListener(pcl);
+    }
+
+    public void removeTempPropertyChangeListener(PropertyChangeListener pcl) {
+        temperatureSupport.removePropertyChangeListener(pcl);
+    }
+
+    public void removePressurePropertyChangeListener(PropertyChangeListener pcl) {
+        pressureSupport.removePropertyChangeListener(pcl);
+    }
+
+    public void removeHumidityPropertyChangeListener(PropertyChangeListener pcl) {
+        humiditySupport.removePropertyChangeListener(pcl);
     }
 
     public void setTemperature(double temperature) {
-        support.firePropertyChange("temperature", this.temperature, temperature);
+        temperatureSupport.firePropertyChange("temperature", this.temperature, temperature);
         this.temperature = temperature;
     }
 
     public void setPressure(double pressure) {
-        support.firePropertyChange("pressure", this.pressure, pressure);
+        pressureSupport.firePropertyChange("pressure", this.pressure, pressure);
         this.pressure = pressure;
     }
 
     public void setHumidity(double humidity) {
-        support.firePropertyChange("humidity", this.humidity, humidity);
+        humiditySupport.firePropertyChange("humidity", this.humidity, humidity);
         this.humidity = humidity;
     }
 
