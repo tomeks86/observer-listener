@@ -6,6 +6,7 @@ import edu.tseidler.propertychangelistener.PCLNewsAgency;
 import edu.tseidler.propertychangelistener.PCLNewsChannel;
 import edu.tseidler.standard.NewsAgency;
 import edu.tseidler.standard.NewsChannel;
+import edu.tseidler.weather.*;
 
 public class Main {
 
@@ -54,5 +55,30 @@ public class Main {
 
         ooobservable.removePropertyChangeListener(ooobserver2);
         ooobservable.setNews("putain!");
+        System.out.println();
+        System.out.println();
+
+        WeatherStation weatherStation = new WeatherStation(15, 1025, 50);
+        Thermometer thermometer1 = new MyPreciseThermometer("termometr 1", weatherStation.getTemperature(), weatherStation.getPressure());
+        Thermometer thermometer2 = new MyOldThermometer("termometr 2", weatherStation.getTemperature(), weatherStation.getPressure());
+        Higrometer higrometer = new MyHigrometer("higrometer", weatherStation.getTemperature(), weatherStation.getHumidity());
+        weatherStation.addPropertyChangeListener(thermometer1);
+        weatherStation.addPropertyChangeListener(thermometer2);
+        weatherStation.addPropertyChangeListener(higrometer);
+
+        System.out.println("temp change!");
+        weatherStation.setTemperature(17);
+        System.out.println("pressure change!");
+        weatherStation.setPressure(1030);
+        System.out.println();
+//        weatherStation.setHumidity(20);
+        System.out.println();
+        System.out.println("temp change!");
+        weatherStation.setTemperature(12);
+        System.out.println("pressure change!");
+        weatherStation.setPressure(1010);
+        System.out.println();
+        System.out.println("humidity change!");
+        weatherStation.setHumidity(10);
     }
 }
